@@ -7,6 +7,10 @@ const app = express();
 const port = process.env.PORT;
 const mongoURI = process.env.MONGOURI;
 
+//cors setup
+const cors = require('cors');
+app.use(cors());
+
 connectToMongo(mongoURI);
 
 app.use(express.json());
