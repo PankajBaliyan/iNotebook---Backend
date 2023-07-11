@@ -2,7 +2,7 @@ const express = require('express');
 const connectToMongo = require('./db');
 
 //set dotenv
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const app = express();
 const port = process.env.PORT;
 const mongoURI = process.env.MONGOURI;
