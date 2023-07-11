@@ -19,6 +19,7 @@ router.post(
         body('name', 'Enter a valid name').isLength({ min: 3 }),
     ],
     async (req, res) => {
+        let success = false;
         const result = validationResult(req);
         if (result.isEmpty()) {
             try {
@@ -26,6 +27,7 @@ router.post(
                 let user = await User.findOne({ email: req.body.email });
                 if (user) {
                     return res.status(400).json({
+                        success,
                         error: 'Sorry, a user with this email already exist',
                     });
                 }
@@ -43,13 +45,17 @@ router.post(
                     },
                 };
                 const authToken = jwt.sign(data, JWT_TOKEN);
-                res.json({ authToken });
+                success = true;
+                res.json({ success, authToken });
             } catch (error) {
                 console.log('Koi error hai, user bnane me');
                 res.status(500).send('Some Error Occurred');
             }
         } else {
-            return res.send({ errors: result.array() });
+            return res.send({
+                success,
+                errors: result.array(),
+            });
         }
     },
 );
@@ -68,27 +74,31 @@ router.post(
             try {
                 let user = await User.findOne({ email });
                 if (!user) {
-                    return res
-                        .status(400)
-                        .json({ error: 'No user exist on this email' });
+                    success = false;
+                    return res.status(400).json({
+                        success,
+                        error: 'No user exist on this email',
+                    });
                 }
                 const passwordCompare = await bcrypt.compare(
                     password,
                     user.password,
                 );
                 if (!passwordCompare) {
-                    return res
-                        .status(400)
-                        .json({ error: 'Wrong Password for this email' });
+                    success = false;
+                    return res.status(400).json({
+                        success,
+                        error: 'Wrong Password for this email',
+                    });
                 }
                 const data = {
                     user: {
                         id: user.id,
                     },
                 };
-                //JWT_SECRET = 'myJSTSecret' & will change it in future
-                const authToken = jwt.sign(data, 'myJSTSecret');
-                res.json({ authToken });
+                const authToken = jwt.sign(data, JWT_TOKEN);
+                success = true;
+                res.json({ success, authToken });
             } catch (error) {
                 console.log('Koi error hai, user login me');
                 res.status(500).send('Internal Server Error');
