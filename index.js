@@ -15,6 +15,12 @@ connectToMongo(mongoURI);
 
 app.use(express.json());
 
+//Define all catch routes
+app.use(express.static(__dirname));
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'index.html'));
+});
+
 //Available routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));
