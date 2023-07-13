@@ -46,7 +46,7 @@ const proxy = httpProxy.createProxyServer();
 
 app.use((req, res, next) => {
     // Conditionally determine the target URL based on the request
-    let targetURL = 'https://www.example.com'; // Replace with your frontend URL
+    let targetURL = 'https://inotebook-0ybd.onrender.com'; // Replace with your frontend URL
 
     // Update the targetURL based on the request's path
     if (req.path.startsWith('/api')) {
