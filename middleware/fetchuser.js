@@ -24,4 +24,4 @@ const fetchuser = (req, res, next) => {
     }
 };
 
-module.exports = connectToMongo;
+module.exports = fetchuser;
