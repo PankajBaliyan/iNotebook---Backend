@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 // Connect to MongoDB
 const connectToMongo = (mongoURI) => {
