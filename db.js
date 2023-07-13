@@ -12,4 +12,4 @@ const connectToMongo = (mongoURI) => {
         });
 };
 
-export default connectToMongo;
+module.exports = connectToMongo;
