@@ -1,5 +1,6 @@
 const express = require('express');
 const connectToMongo = require('./db');
+const path = require('path');
 
 //set dotenv
 require('dotenv').config();
