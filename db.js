@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 // Connect to MongoDB
 const connectToMongo = (mongoURI) => {
@@ -12,4 +12,4 @@ const connectToMongo = (mongoURI) => {
         });
 };
 
-module.exports = connectToMongo;
+export default connectToMongo;
