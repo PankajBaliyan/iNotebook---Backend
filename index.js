@@ -20,12 +20,14 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));
 
-// Serve the React app's build files from the frontend's public URL
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve the React app's build files
+app.use(express.static(path.join(__dirname, 'https://inotebook-0ybd.onrender.com')));
 
 // Wildcard route to serve the React app's index.html for all other routes
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(
+        path.join(__dirname, 'https://inotebook-0ybd.onrender.com', 'index.html'),
+    );
 });
 
 app.listen(port, () => {
