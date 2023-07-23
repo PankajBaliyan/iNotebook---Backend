@@ -22,7 +22,7 @@ app.use('/api/notes', require('./routes/notes'));
 
 // Serve the React app's build files
 app.use(express.static(path.join(__dirname, 'https://inotebook-0ybd.onrender.com')));
-
+console.log("hi")
 // Wildcard route to serve the React app's index.html for all other routes
 app.get('*', (req, res) => {
     res.sendFile(
